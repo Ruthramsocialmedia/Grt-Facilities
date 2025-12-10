@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Amenities | Luxury Resort</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-primary: #c1282f;
+        --brand-dark: #9a1f25;
+        --brand-light: #d95358;
+        --neutral-dark: #1a1a1a;
+        --neutral-light: #f8f8f8;
+        --neutral-gray: #eaeaea;
+        --text-primary: #333333;
+        --text-secondary: #666666;
+        --white: #ffffff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --shadow-hover: 0 15px 35px rgba(193, 40, 47, 0.12);
+        --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Satoshi", sans-serif;
+      }
+
+      body {
+        background-color: var(--neutral-light);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Section */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--neutral-dark) 0%,
+          #2a2a2a 100%
+        );
+        color: var(--white);
+        padding: 80px 0 60px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(193, 40, 47, 0.1) 0%,
+          transparent 50%
+        );
+      }
+
+      .header h1 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header h1 span {
+        color: var(--brand-primary);
+      }
+
+      .header-subtitle {
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: rgba(255, 255, 255, 0.85);
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-intro {
+        max-width: 800px;
+        margin: 20px auto 60px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+
+      /* Category Tabs */
+      .category-tabs {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 50px;
+      }
+
+      .category-tab {
+        padding: 12px 24px;
+        background: var(--white);
+        border: 1px solid var(--neutral-gray);
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .category-tab:hover {
+        border-color: var(--brand-light);
+        color: var(--brand-primary);
+      }
+
+      .category-tab.active {
+        background-color: var(--brand-primary);
+        color: var(--white);
+        border-color: var(--brand-primary);
+      }
+
+      /* Amenities Grid */
+      .amenities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 28px;
+        margin-bottom: 80px;
+      }
+
+      .amenity-card {
+        background-color: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        height: 100%;
+      }
+
+      .amenity-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .amenity-card:hover .icon-wrapper {
+        background-color: var(--brand-dark);
+        transform: scale(1.05);
+      }
+
+      .amenity-card:hover .amenity-title {
+        color: var(--brand-primary);
+      }
+
+      .card-top {
+        padding: 30px 25px 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .icon-wrapper {
+        width: 70px;
+        height: 70px;
+        background-color: var(--brand-primary);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        transition: var(--transition);
+      }
+
+      .icon-wrapper i {
+        font-size: 28px;
+        color: var(--white);
+      }
+
+      .amenity-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+        transition: var(--transition);
+      }
+
+      .amenity-description {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+      }
+
+      .card-bottom {
+        padding: 18px 25px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .amenity-category {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 30px;
+        background-color: rgba(193, 40, 47, 0.1);
+        color: var(--brand-primary);
+      }
+
+      .amenity-status {
+        font-size: 0.75rem;
+        color: #4caf50;
+        font-weight: 600;
+      }
+
+      /* Featured Amenities */
+      .featured-section {
+        margin-bottom: 80px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+        margin-bottom: 40px;
+        color: var(--neutral-dark);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 3px;
+        background-color: var(--brand-primary);
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .featured-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+      }
+
+      .featured-card {
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        display: flex;
+        transition: var(--transition);
+      }
+
+      .featured-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .featured-icon {
+        width: 100px;
+        background-color: var(--brand-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .featured-icon i {
+        font-size: 36px;
+        color: var(--white);
+      }
+
+      .featured-content {
+        padding: 25px;
+        flex: 1;
+      }
+
+      .featured-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: var(--neutral-dark);
+      }
+
+      .featured-content p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      /* Footer */
+      .footer {
+        background-color: var(--neutral-dark);
+        color: var(--white);
+        padding: 60px 0 30px;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto 40px;
+      }
+
+      .footer-logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .footer-logo span {
+        color: var(--brand-primary);
+      }
+
+      .footer-text {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 30px;
+        font-size: 0.95rem;
+      }
+
+      .footer-bottom {
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .amenities-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 24px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2.5rem;
+        }
+
+        .category-tabs {
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: 10px;
+        }
+
+        .amenities-grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+
+        .featured-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .header {
+          padding: 60px 0 40px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .amenities-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .category-tab {
+          padding: 10px 18px;
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <div class="header">
+      <div class="container">
+        <h1>Premium <span>Amenities</span></h1>
+        <p class="header-subtitle">
+          Experience thoughtfully designed facilities for leisure, comfort,
+          wellness, and lifestyle at our luxury resort.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <p class="section-intro">
+        Discover a curated selection of premium amenities designed to enhance
+        your stay. From wellness facilities to exclusive entertainment, we
+        provide everything needed for an unforgettable luxury experience.
+      </p>
+
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <div class="category-tab active" data-category="all">All Amenities</div>
+        <div class="category-tab" data-category="wellness">Wellness & Spa</div>
+        <div class="category-tab" data-category="dining">Dining & Bar</div>
+        <div class="category-tab" data-category="recreation">Recreation</div>
+        <div class="category-tab" data-category="accommodation">
+          Accommodation
+        </div>
+        <div class="category-tab" data-category="family">Family Friendly</div>
+      </div>
+
+      <!-- Amenities Grid -->
+      <div class="amenities-grid">
+        <!-- Wellness & Spa -->
+        <div class="amenity-card" data-category="wellness">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-spa"></i>
+            </div>
+            <h3 class="amenity-title">Luxury Spa</h3>
+            <p class="amenity-description">
+              Rejuvenate with our premium spa treatments and therapies.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Wellness</span>
+            <span class="amenity-status">Available</span>
+          </div>
+        </div>
+
+        <div class="amenity-card" data-category="wellness">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <h3 class="amenity-title">Fitness Center</h3>
+            <p class="amenity-description">
+              State-of-the-art gym equipment with personal training options.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Wellness</span>
+            <span class="amenity-status">24/7 Access</span>
+          </div>
+        </div>
+
+        <!-- Dining & Bar -->
+        <div class="amenity-card" data-category="dining">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-wine-glass-alt"></i>
+            </div>
+            <h3 class="amenity-title">Premium Bar</h3>
+            <p class="amenity-description">
+              Craft cocktails and fine spirits in an elegant setting.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Dining</span>
+            <span class="amenity-status">Live Music</span>
+          </div>
+        </div>
+
+        <div class="amenity-card" data-category="dining">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <h3 class="amenity-title">Garden Dining</h3>
+            <p class="amenity-description">
+              Al fresco dining surrounded by lush tropical gardens.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Dining</span>
+            <span class="amenity-status">Seasonal Menu</span>
+          </div>
+        </div>
+
+        <!-- Recreation -->
+        <div class="amenity-card" data-category="recreation">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-swimming-pool"></i>
+            </div>
+            <h3 class="amenity-title">Infinity Pool</h3>
+            <p class="amenity-description">
+              Stunning infinity pool with panoramic resort views.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Recreation</span>
+            <span class="amenity-status">Heated</span>
+          </div>
+        </div>
+
+        <div class="amenity-card" data-category="recreation">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-hiking"></i>
+            </div>
+            <h3 class="amenity-title">Nature Trails</h3>
+            <p class="amenity-description">
+              Guided hiking through pristine natural landscapes.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Recreation</span>
+            <span class="amenity-status">Guided Tours</span>
+          </div>
+        </div>
+
+        <!-- Accommodation -->
+        <div class="amenity-card" data-category="accommodation">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-concierge-bell"></i>
+            </div>
+            <h3 class="amenity-title">Suite Rooms</h3>
+            <p class="amenity-description">
+              Luxuriously appointed suites with premium amenities.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Accommodation</span>
+            <span class="amenity-status">Butler Service</span>
+          </div>
+        </div>
+
+        <div class="amenity-card" data-category="accommodation">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-car-battery"></i>
+            </div>
+            <h3 class="amenity-title">EV Charging</h3>
+            <p class="amenity-description">
+              High-speed electric vehicle charging stations.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Accommodation</span>
+            <span class="amenity-status">Complimentary</span>
+          </div>
+        </div>
+
+        <!-- Family Friendly -->
+        <div class="amenity-card" data-category="family">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-child"></i>
+            </div>
+            <h3 class="amenity-title">Kids Club</h3>
+            <p class="amenity-description">
+              Supervised activities and entertainment for children.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Family</span>
+            <span class="amenity-status">Ages 3-12</span>
+          </div>
+        </div>
+
+        <div class="amenity-card" data-category="family">
+          <div class="card-top">
+            <div class="icon-wrapper">
+              <i class="fas fa-paw"></i>
+            </div>
+            <h3 class="amenity-title">Pet Friendly</h3>
+            <p class="amenity-description">
+              Special accommodations and services for your pets.
+            </p>
+          </div>
+          <div class="card-bottom">
+            <span class="amenity-category">Family</span>
+            <span class="amenity-status">Pet Services</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">Luxury<span>Resort</span></div>
+          <p class="footer-text">
+            Experience unparalleled luxury and service at our premium resort.
+            Our thoughtfully designed amenities ensure an unforgettable stay for
+            every guest.
+          </p>
+        </div>
+        <div class="footer-bottom">
+          © 2025 Luxury Resort Amenities. All Rights Reserved. | Privacy Policy
+          | Terms of Service
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Category filtering functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".category-tab");
+        const cards = document.querySelectorAll(".amenity-card");
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            // Remove active class from all tabs
+            tabs.forEach((t) => t.classList.remove("active"));
+
+            // Add active class to clicked tab
+            this.classList.add("active");
+
+            const category = this.getAttribute("data-category");
+
+            // Show/hide cards based on category
+            cards.forEach((card) => {
+              if (
+                category === "all" ||
+                card.getAttribute("data-category") === category
+              ) {
+                card.style.display = "block";
+                setTimeout(() => {
+                  card.style.opacity = "1";
+                  card.style.transform = "translateY(0)";
+                }, 10);
+              } else {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                setTimeout(() => {
+                  card.style.display = "none";
+                }, 300);
+              }
+            });
+          });
+        });
+
+        // Add hover effects to cards
+        cards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.zIndex = "10";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.zIndex = "1";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
